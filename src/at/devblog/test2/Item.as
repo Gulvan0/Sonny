@@ -62,6 +62,9 @@ package at.devblog.test2
 		{
 			switch (name)
 			{
+				case "None":
+					_model = new ItemSlot();
+					break;
 				case "Stone club":
 					_model = new StoneClub();
 					_type = "Left-handed item";
@@ -70,6 +73,7 @@ package at.devblog.test2
 					_ability = Dictionary.Ia_stoneClub;
 					_rarity = "Common";
 					_dropChance = 1;
+					break;
 				default:
 					return;
 			}

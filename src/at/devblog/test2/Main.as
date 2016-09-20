@@ -143,15 +143,17 @@ package at.devblog.test2
 				xpToGain.push(gainingResult.toGain);
 				isLvledUp.push(gainingResult.newLevel);
 			}
-		
-			for each(var item:Item in enemyArray[0].equipment.arrayForm)
+			
+			for each (var item:Item in enemyArray[0].equipment.arrayForm)
 			{
-				MonsterDebugger.trace(null, item);
 				if (item != null)
 					if (Utils.flip(item.dropChance))
 						if (loot.length < 4)
 							loot.push(item);
 			}
+			
+			for (var i:int = loot.length; i < 4; i++)
+				loot.push(new Item("None"));
 			
 			//Visual part
 			include "maps/looting.as";
@@ -159,7 +161,7 @@ package at.devblog.test2
 			var background:MovieClip;
 			include "preparation/looting/bgSetter.as";
 			include "preparation/looting/resultsSetter.as";
-			for (var i:int = 0; i < loot.length; i++)
+			for (var i:int = 0; i < 4; i++)
 				gfx.place(loot[i].model, ITEM_X[i], ITEM_SLOTS_Y);
 			include "preparation/looting/lootSetter.as";
 			include "preparation/looting/proceedSetter.as";
