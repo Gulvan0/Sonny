@@ -143,8 +143,8 @@ package at.devblog.test2
 				xpToGain.push(gainingResult.toGain);
 				isLvledUp.push(gainingResult.newLevel);
 			}
-
-			for each (var item:Item in enemyArray[0].equipment)
+		
+			for each(var item:Item in enemyArray[0].equipment.arrayForm)
 			{
 				MonsterDebugger.trace(null, item);
 				if (item != null)

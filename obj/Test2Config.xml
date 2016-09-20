@@ -8,15 +8,15 @@
   <compiler>
     <define append="true">
       <name>CONFIG::debug</name>
-      <value>false</value>
-    </define>
-    <define append="true">
-      <name>CONFIG::release</name>
       <value>true</value>
     </define>
     <define append="true">
+      <name>CONFIG::release</name>
+      <value>false</value>
+    </define>
+    <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'19.09.2016'</value>
+      <value>'20.09.2016'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -30,20 +30,18 @@
       <name>CONFIG::desktop</name>
       <value>false</value>
     </define>
-    <optimize>true</optimize>
-    <omit-trace-statements>true</omit-trace-statements>
-    <verbose-stacktraces>false</verbose-stacktraces>
+    <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-      <path-element>C:\Users\Никита\Desktop\Test2\src</path-element>
+      <path-element>C:\Users\Никита\Documents\GitHub\Sonny\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
-      <path-element>C:\Users\Никита\Desktop\Test2\bin\MonsterDebugger.swc</path-element>
-      <path-element>C:\Users\Никита\Desktop\Test2\bin\graphics.swc</path-element>
+      <path-element>C:\Users\Никита\Documents\GitHub\Sonny\bin\MonsterDebugger.swc</path-element>
+      <path-element>C:\Users\Никита\Documents\GitHub\Sonny\bin\graphics.swc</path-element>
     </library-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Users\Никита\Desktop\Test2\src\at\devblog\test2\Main.as</path-element>
+    <path-element>C:\Users\Никита\Documents\GitHub\Sonny\src\at\devblog\test2\Main.as</path-element>
   </file-specs>
   <default-background-color>#C0C0C0</default-background-color>
   <default-frame-rate>30</default-frame-rate>
