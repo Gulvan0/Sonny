@@ -13,6 +13,7 @@ package at.devblog.test2
 	import flash.events.TimerEvent;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
 	import flash.utils.Timer;
 	import flash.system.fscommand;
 	import flash.geom.Point;
@@ -145,24 +146,21 @@ package at.devblog.test2
 			}
 			
 			for each (var item:Item in enemyArray[0].equipment.arrayForm)
-			{
 				if (item != null)
 					if (Utils.flip(item.dropChance))
 						if (loot.length < 4)
 							loot.push(item);
-			}
 			
 			for (var i:int = loot.length; i < 4; i++)
 				loot.push(new Item("None"));
 			
 			//Visual part
 			include "maps/looting.as";
+			var lootingContainer:Sprite = new Sprite();
+			gfx.place(lootingContainer);
 			
-			var background:MovieClip;
 			include "preparation/looting/bgSetter.as";
 			include "preparation/looting/resultsSetter.as";
-			for (var i:int = 0; i < 4; i++)
-				gfx.place(loot[i].model, ITEM_X[i], ITEM_SLOTS_Y);
 			include "preparation/looting/lootSetter.as";
 			include "preparation/looting/proceedSetter.as";
 			

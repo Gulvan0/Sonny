@@ -12,4 +12,4 @@ const NO_ITEMS_TEXT_POS:Point = new Point(575, 200);
 const PROCEED_BUTTON_POS:Point = new Point(345, 455);
 		
 const PLAYER_RESULT_FORMAT:TextFormat = new TextFormat(null, 42);
-const AVAIBLE_SLOTS_TEXT_FORMAT:TextFormat = new TextFormat(null, 42);
+const AVAIBLE_SLOTS_TEXT_FORMAT:TextFormat = new TextFormat(null, 42, 0xA05136, true, null, null, null, null, TextFormatAlign.CENTER);
