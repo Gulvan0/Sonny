@@ -163,9 +163,6 @@ package at.devblog.test2
 			include "preparation/looting/resultsSetter.as";
 			include "preparation/looting/lootSetter.as";
 			include "preparation/looting/proceedSetter.as";
-			
-			include "cleaners/looting.as";
-			roaming(gfx);
 		}
 		
 		private static function roaming(gfx:Gfx):void
