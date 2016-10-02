@@ -8,7 +8,7 @@ package at.devblog.test2
 	 * ...
 	 * @author Gulvan
 	 */
-	internal final class Unit 
+	public final class Unit 
 	{
 		/*
 		 * Unit creation:
@@ -18,20 +18,9 @@ package at.devblog.test2
 		
 		//Facade properties
 		private var _name:String;
-		public function get name():String
-		{
-			return _name;
-		}
 		private var _model:MovieClip;
-		public function get model():MovieClip
-		{
-			return _model;
-		}
 		private var _type:String;
-		public function get type():String
-		{
-			return _type;
-		}
+		private var _line:String;
 		
 		//Items
 		public var inventory:Array;
@@ -39,15 +28,7 @@ package at.devblog.test2
 		
 		//Character develop properties
 		private var _level:int;
-		public function get level():int
-		{
-			return _level;
-		}
-		private var _xp:int; 
-		public function get xp():int
-		{
-			return _xp;
-		}
+		private var _xp:int;
 		
 		public var vitality:int;
 		public var strength:int;
@@ -58,48 +39,20 @@ package at.devblog.test2
 		public var attributePoints:int;
 		
 		private var _wheelMaxLength:int;
-		public function get wheelMaxLength():int
-		{
-			return _wheelMaxLength;
-		}
 		private var _wheel:Array;
-		public function get wheel():Array
-		{
-			return _wheel;
-		}
 		
 		//Subordinate properties
 		private var _maxhp:int;
-		public function get maxhp():int
-		{
-			return _maxhp;
-		}
 		private var _maxArcane:int;
-		public function get maxArcane():int
-		{	
-			return _maxArcane;
-		}
+		
 		public var instinct:int;
 		public var defense:int;
 		
 		//Dynamic properties
 		private var _hp:int;
-		public function get hp():int
-		{
-			return _hp;
-		}
 		private var _arcane:int;
-		public function get arcane():int
-		{
-			return _arcane;
-		}
 		private var _buffs:Array;
-		public function get buffs():Array
-		{
-			return _buffs;
-		}
 		
-		// -----------------------------------------------------------------------------------
 		
 		public function damage(damageCount:int, dealer:Unit, pure:Boolean = false):void
 		{
@@ -217,19 +170,31 @@ package at.devblog.test2
 				_wheelMaxLength++;
 		}
 		
-		// -----------------------------------------------------------------------------------
+		// ---------------------------------------------------------------------------------------
+		public function makeTurn():void
+		{
+			switch (_name)
+			{
+				case "Metabii":
+					if (_wheel[1].cooldown == 0 && _hp < 70 / 100 * maxhp) //If hp is lower than 70%, enrage
+						_wheel[1].call(this, this);
+					else                                                  //Otherwise, quickstrike
+						_wheel[0].call(Utils.getWeakestUnit(Main.allies), this);
+			}
+		}
 		
 		private function setUnit(name:String):void
 		{
 			switch (name)
 			{
-				case "Sonny":
+				case "Khoru":
 					_model = new Hero();
 					equipment = new Equipment(null, null, null, null, null, null);
 					inventory = [];
 					break;
 				case "Metabii":
 					_model = new Metabii();
+					_line = "Warrior";
 					equipment = new Equipment(null, null, null, null, new Item("Stone club"), null);
 					vitality += 0;
 					strength += 0;
@@ -243,29 +208,14 @@ package at.devblog.test2
 			}
 		}
 		
-		public function makeTurn():void
-		{
-			switch (_name)
-			{
-				case "Metabii":
-					if (_wheel[1].cooldown == 0 && _hp < 70 / 100 * maxhp) //If hp is lower than 70%, enrage
-						_wheel[1].call(this, this);
-					else                                                  //Otherwise, simply attack the enemy
-						_wheel[0].call(Utils.getWeakestUnit(Main.allies), this);
-			}
-		}
-		
-		public function Unit(newName:String, newType:String, newLevel:int, newWheel:Array = null):void
+		public function Unit(newName:String, newType:String, newLevel:int, newWheel:Array = null, newLine:String = null):void
 		{
 			//Given properties
 			_name = newName;
 			_type = newType;
-			if (_level > 1)
-				_level = newLevel;
-			else
-				_level = 1;
-			if (newWheel != null)
-				_wheel = newWheel;
+			(_level > 1)? _level = newLevel : 1;
+			(newWheel != null)? _wheel = newWheel : null;
+			(newLine != null)? _line = newLine : null;
 			
 			//Initial values of static properties
 			vitality = _level - 1;
@@ -286,6 +236,74 @@ package at.devblog.test2
 			_hp = _maxhp;
 			_arcane = _maxArcane;
 			_buffs = [];
+		}
+		
+		//---------------------------------------------------------------------------------------
+
+		
+		public function get name():String 
+		{
+			return _name;
+		}
+		
+		public function get model():MovieClip 
+		{
+			return _model;
+		}
+		
+		public function get type():String 
+		{
+			return _type;
+		}
+		
+		public function get level():int 
+		{
+			return _level;
+		}
+		
+		public function get xp():int 
+		{
+			return _xp;
+		}
+		
+		public function get wheelMaxLength():int 
+		{
+			return _wheelMaxLength;
+		}
+		
+		public function get wheel():Array 
+		{
+			return _wheel;
+		}
+		
+		public function get maxhp():int 
+		{
+			return _maxhp;
+		}
+		
+		public function get maxArcane():int 
+		{
+			return _maxArcane;
+		}
+		
+		public function get hp():int 
+		{
+			return _hp;
+		}
+		
+		public function get arcane():int 
+		{
+			return _arcane;
+		}
+		
+		public function get buffs():Array 
+		{
+			return _buffs;
+		}
+		
+		public function get line():String 
+		{
+			return _line;
 		}
 	}
 	

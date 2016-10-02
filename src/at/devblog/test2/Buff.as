@@ -19,30 +19,14 @@ package at.devblog.test2
 		
 		//Constant properties
 		private var _name:String;
-		public function get name():String
-		{
-			return _name;
-		}
 		private var _link:Function;
-		public function get link():Function
-		{
-			return _link;
-		}
 		private var _icon:MovieClip;
-		public function get icon():MovieClip
-		{
-			return _icon;
-		}
 		
 		private var _owner:Unit;
 		private var _duration:int; //aka. maxTurnsLeft
 		
 		//Variable properties
 		private var _turnsLeft:int;
-		public function get turnsleft():int
-		{
-			return _turnsLeft;
-		}
 		
 		public function tick():void
 		{
@@ -101,6 +85,28 @@ package at.devblog.test2
 			
 			//Getting determined properties
 			setBuff(_name);
+		}
+		
+		//-----------------------------------------------------------------------------------------
+		
+		public function get name():String 
+		{
+			return _name;
+		}
+		
+		public function get link():Function 
+		{
+			return _link;
+		}
+		
+		public function get icon():MovieClip 
+		{
+			return _icon;
+		}
+		
+		public function get turnsLeft():int 
+		{
+			return _turnsLeft;
 		}
 		
 	}

@@ -24,6 +24,7 @@ package at.devblog.test2
 	 */
 	public final class Main extends Sprite 
 	{
+		
 		//Progress data
 		public static var zone:String;
 		public static var stageNum:int;
@@ -32,7 +33,8 @@ package at.devblog.test2
 		public static var hero:Unit;
 		public static var allies:Array;
 		
-		private function battle(gfx:Gfx, enemy0:String, enemy1:String = null, enemy2:String = null):void
+		include "utils/graphics.as";
+		private function battle(enemy0:String, enemy1:String = null, enemy2:String = null):void
 		{
 			include "utils/battle/battleModes.as";
 			include "maps/battle.as";
@@ -91,7 +93,7 @@ package at.devblog.test2
 					removeEventListener(KeyboardEvent.KEY_DOWN, action); //Forbid further attacks
 					var winner:String = (alliesSumHP <= 0)? "enemy" : "ally"; //Detect winner team
 					include "cleaners/battle.as";
-					looting(gfx, winner, allies, enemies); //Next phase
+					looting(winner, allies, enemies); //Next phase
 					return;
 				}
 				
@@ -129,7 +131,7 @@ package at.devblog.test2
 			}
 		}
 		
-		private static function looting(gfx:Gfx, winnerTeam:String, allyArray:Array, enemyArray:Array):void
+		private function looting(winnerTeam:String, allyArray:Array, enemyArray:Array):void
 		{
 			//Math & logic part
 			var xpGained:int = Utils.countGainedXP(allyArray, enemyArray, winnerTeam);
@@ -157,7 +159,7 @@ package at.devblog.test2
 			//Visual part
 			include "maps/looting.as";
 			var lootingContainer:Sprite = new Sprite();
-			gfx.place(lootingContainer);
+			place(lootingContainer);
 			
 			include "preparation/looting/bgSetter.as";
 			include "preparation/looting/resultsSetter.as";
@@ -165,7 +167,7 @@ package at.devblog.test2
 			include "preparation/looting/proceedSetter.as";
 		}
 		
-		private static function roaming(gfx:Gfx):void
+		private static function roaming():void
 		{
 			
 		}
@@ -175,18 +177,15 @@ package at.devblog.test2
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			MonsterDebugger.initialize(this);
 			
-			var gfx:Gfx = new Gfx();
-			addChild(gfx);
-			
 			//Initial values of global data
-			hero = new Unit("Sonny", "self", 1, [new Ability("Quick Strike", 0), new Ability("Suppression", 4)]);
+			hero = new Unit("Khoru", "self", 1, [new Ability("Quick Strike", 0), new Ability("Suppression", 4)], "Shadow");
 			allies = [hero];
 			
-			zone = "Melting volcanos";
+			zone = "Silent barren";
 			stageNum = 1;
-			
-			//Start
-			battle(gfx, "Metabii");
+            			
+			//Start point
+			battle("Metabii");
 		}
 		
 		public function Main() 

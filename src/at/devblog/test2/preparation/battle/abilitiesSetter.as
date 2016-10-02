@@ -10,5 +10,5 @@ for (var i:int = 0; i < 10; i++)
 	else
 		abilityIconsArray.push(new LockedAb());
 	
-	gfx.place(abilityIconsArray[i], abilityIconX(i), abilityIconY());
+	place(abilityIconsArray[i], abilityIconX(i), abilityIconY());
 }

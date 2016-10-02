@@ -38,5 +38,5 @@ function recognizeClickedUnit(e:MouseEvent):Unit
 
 function placeTarget(unit:Unit):void
 {
-	gfx.place(target, unit.model.x, unit.model.y);
+	place(target, unit.model.x, unit.model.y);
 }

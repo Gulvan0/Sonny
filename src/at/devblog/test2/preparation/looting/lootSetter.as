@@ -7,7 +7,7 @@ function takeItem(i:int):void
 	
 	hero.inventory.push(loot[i]);
 	loot[i] = new Item("None");
-	gfx.place(loot[i].model, ITEM_X[i], ITEM_SLOTS_Y, lootingContainer);
+	place(loot[i].model, ITEM_X[i], ITEM_SLOTS_Y, lootingContainer);
 	setSlotsText();
 }
 
@@ -38,17 +38,17 @@ if (loot[0].name != "None") //"nones" are the rest; if all array is rest, there 
 	var takeButtonsArray:Array = [];
 	for (var i:int = 0; i < 4; i++)
 	{
-		gfx.place(loot[i].model, ITEM_X[i], ITEM_SLOTS_Y, lootingContainer);
+		place(loot[i].model, ITEM_X[i], ITEM_SLOTS_Y, lootingContainer);
 		takeButtonsArray.push(new TakeItem());
-		gfx.place(takeButtonsArray[i], ITEM_X[i], TAKE_BUTTONS_Y, lootingContainer);
+		place(takeButtonsArray[i], ITEM_X[i], TAKE_BUTTONS_Y, lootingContainer);
 		takeButtonsArray[i].addEventListener(MouseEvent.CLICK, handlerArray[i]);
 	}
 	
 	setSlotsText();
-	gfx.place(slotsAvaible, AVAIBLE_SLOTS_TEXT_POS.x, AVAIBLE_SLOTS_TEXT_POS.y, lootingContainer);
+	place(slotsAvaible, AVAIBLE_SLOTS_TEXT_POS.x, AVAIBLE_SLOTS_TEXT_POS.y, lootingContainer);
 }
 else
-	gfx.place(new NoItemsLooted(), NO_ITEMS_TEXT_POS.x, NO_ITEMS_TEXT_POS.y, lootingContainer);
+	place(new NoItemsLooted(), NO_ITEMS_TEXT_POS.x, NO_ITEMS_TEXT_POS.y, lootingContainer);
 	
 function setSlotsText():void
 {

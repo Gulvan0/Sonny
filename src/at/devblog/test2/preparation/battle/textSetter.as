@@ -18,15 +18,16 @@ for each (var textfield:BattleText in unitStateTextsArray)
 		{
 			case "name":
 				textfield.text = teamArray[textfield.unit].name;
+				textfield.setTextFormat(NAME_FORMAT);
 				break;
 			case "hp":
 				textfield.text = teamArray[textfield.unit].hp;
-				textfield.textColor = 0x00B33A;
+				textfield.setTextFormat(HP_FORMAT);
 				break;
 			case "arcane":
 				textfield.text = teamArray[textfield.unit].arcane;
-				textfield.textColor = 0x1194C6;
+				textfield.setTextFormat(ARCANE_FORMAT);
 				break;
 		}
-	gfx.place(textfield, unitStateTextX(textfield.team, textfield.property), unitStateTextY(textfield.unit));
+	place(textfield, unitStateTextX(textfield.team, textfield.property), unitStateTextY(textfield.unit));
 }

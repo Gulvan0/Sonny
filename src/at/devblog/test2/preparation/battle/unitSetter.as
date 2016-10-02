@@ -11,7 +11,7 @@ if (enemy1 != null)
 
 //Place units' models
 for (var i:int = 0; i < enemies.length; i++)
-	gfx.place(enemies[i].model, unitX("enemy", i), unitY(i));
+	place(enemies[i].model, unitX("enemy", i), unitY(i));
 	
 for (var j:int = 0; j < allies.length; j++)
-	gfx.place(allies[j].model, unitX("ally", j), unitY(j));
+	place(allies[j].model, unitX("ally", j), unitY(j));

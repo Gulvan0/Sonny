@@ -16,30 +16,10 @@ package at.devblog.test2
 		
 		//Constant properties
 		private var _name:String;
-		public function get name():String
-		{
-			return _name;
-		}
 		private var _icon:MovieClip;
-		public function get icon():MovieClip
-		{
-			return _icon;
-		}
 		private var _link:Function;
-		public function get link():Function
-		{
-			return _link;
-		}
 		private var _possibleTargets:Array;
-		public function get possibleTargets():Array
-		{
-			return _possibleTargets;
-		}
-		private var _arcaneCost:int = 0;
-		public function get arcaneCost():int
-		{
-			return _arcaneCost;
-		}
+		private var _arcaneCost:int;
 		
 		private var startCooldown:int;
 		
@@ -125,6 +105,33 @@ package at.devblog.test2
 			
 			//Getting determined properties
 			setAbility(_name);
+		}
+		
+		//-----------------------------------------------------------------------------------------
+		
+		public function get name():String 
+		{
+			return _name;
+		}
+		
+		public function get icon():MovieClip 
+		{
+			return _icon;
+		}
+		
+		public function get link():Function 
+		{
+			return _link;
+		}
+		
+		public function get possibleTargets():Array 
+		{
+			return _possibleTargets;
+		}
+		
+		public function get arcaneCost():int 
+		{
+			return _arcaneCost;
 		}
 	}
 

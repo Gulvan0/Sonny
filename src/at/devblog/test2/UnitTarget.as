@@ -1,8 +1,8 @@
-package at.devblog.test2 
+package at.devblog.test2
 {
 	/**
 	 * ...
-	 * @author ...
+	 * @author Gulvan
 	 */
 	internal class UnitTarget extends Target 
 	{

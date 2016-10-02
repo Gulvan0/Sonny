@@ -7,6 +7,10 @@ const ABILITY_W:Number = 65;
 const ABILITY_H:Number = 65;
 const ABILITY_NUM_W:Number = 30;
 
+const NAME_FORMAT:TextFormat = new TextFormat("Calibri", 15, 0x72697C);
+const HP_FORMAT:TextFormat = new TextFormat("Lucida Console", 15, 0x54C025, true);
+const ARCANE_FORMAT:TextFormat = new TextFormat("Segoe Script", 15, 0x2C8CD3);
+
 function unitX(team:String, num:int):Number 
 {
 	if (team == "ally")
