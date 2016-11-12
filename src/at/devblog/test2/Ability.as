@@ -1,5 +1,6 @@
 package at.devblog.test2 
 {
+	import at.devblog.test2.utils.Element;
 	import com.demonsters.debugger.*;
 	import flash.display.MovieClip;
 	/**
@@ -20,12 +21,15 @@ package at.devblog.test2
 		private var _link:Function;
 		private var _possibleTargets:Array;
 		private var _arcaneCost:int;
+		private var _startCooldown:int;
 		
-		private var startCooldown:int;
+		private var element:Element;
 		
 		//Variable properties
 		public var cooldown:int;
 		public var delay:int;
+		
+		private var _ama:Ama;
 		
 		public function canBeAppliedOn(unitType:String):Boolean
 		{
@@ -61,8 +65,8 @@ package at.devblog.test2
 		
 		public function call(target:Unit, caster:Unit):void
 		{
-			cooldown = startCooldown;
-			_link(target, caster);
+			_link(target, caster, _ama);
+			cooldown = _startCooldown;
 			caster.drain(_arcaneCost);
 			//Add shader + number of remaining turns
 		}
@@ -99,7 +103,7 @@ package at.devblog.test2
 		{
 			//Defining arbitrary properties
 			_name = newName;
-			startCooldown = newCooldown;
+			_startCooldown = newCooldown;
 			cooldown = 0;
 			delay = newDelay;
 			

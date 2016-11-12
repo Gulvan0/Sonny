@@ -13,19 +13,19 @@ package at.devblog.test2
 		 * 
 		 * Signature: target, caster
 		 */
-		public static function A_quickstrike(target:Unit, caster:Unit):void
+		public static function A_quickstrike(target:Unit, caster:Unit, modifiers:Ama):void
 		{
 			var damageCount:int = Utils.random(40, caster.flow);
 			target.damage(damageCount, caster);
 		}
 		
-		public static function A_suppression(target:Unit, caster:Unit):void
+		public static function A_suppression(target:Unit, caster:Unit, modifiers:Ama):void
 		{
 			var suppressedBuff:Buff = new Buff("Suppressed", 3);
 			suppressedBuff.cast(target);
 		}
 		
-		public static function A_enrage(target:Unit, caster:Unit):void
+		public static function A_enrage(target:Unit, caster:Unit, modifiers:Ama):void
 		{
 			var enragedBuff:Buff = new Buff("Enraged", 2);
 			enragedBuff.cast(target);
