@@ -1,5 +1,6 @@
 package at.devblog.test2 
 {
+	import at.devblog.test2.utils.BattleMode;
 	import at.devblog.test2.utils.GainResult;
 	import com.demonsters.debugger.MonsterDebugger;
 	import flash.display.DisplayObject;
@@ -33,10 +34,9 @@ package at.devblog.test2
 		public static var hero:Unit;
 		public static var allies:Array;
 		
-		include "utils/graphics.as";
+		include "engine/graphics.as";
 		private function battle(enemy0:String, enemy1:String = null, enemy2:String = null):void
 		{
-			include "utils/battle/battleModes.as";
 			include "maps/battle.as";
 			
 			var staticsContainer:Sprite;
@@ -51,7 +51,7 @@ package at.devblog.test2
 			include "preparation/battle/targetSetter.as";
 			
 			var allyTurn:Boolean = Utils.isAllyTurn(hero, enemies[0]); //Defining which turn will be first
-			var battleState:int = allyTurn? WAITING : RUNNING;  //Wait for input OR force enemies to attack
+			var battleState:BattleMode = allyTurn? BattleMode.WAITING : BattleMode.RUNNING;  //Wait for input OR force enemies to attack
 			var processingAbility:Ability; //Inter-phase variable
 			
 			//Theese variables are created for checking "team alive?" condition
@@ -75,11 +75,11 @@ package at.devblog.test2
 					ability = hero.wheel[10];
 				
 				//If it's your turn and there is such ability on the wheel, check manacost, cooldown and possible targets
-				if (battleState == WAITING && ability != null)
+				if (battleState == BattleMode.WAITING && ability != null)
 					if (ability.isAvaible(hero) && ability.canBeAppliedOn(target.unit.type))
 					{
 						processingAbility = ability;
-						battleState = PROCESSING_INPUT;
+						battleState = BattleMode.PROCESSING_INPUT;
 					}
 				//If input isn't valid, continue to wait
 			}
@@ -99,7 +99,7 @@ package at.devblog.test2
 				
 				switch (battleState)
 				{
-					case RUNNING:
+					case BattleMode.RUNNING:
 						for (var i:int = 1; i < allies.length; i++)
 						{
 							allies[i].makeTurn();
@@ -118,14 +118,14 @@ package at.devblog.test2
 							if (enemiesSumHP <= 0 || alliesSumHP <= 0)
 								break;
 						}
-						battleState = WAITING;
+						battleState = BattleMode.WAITING;
 						break;
-					case PROCESSING_INPUT:
+					case BattleMode.PROCESSING_INPUT:
 						processingAbility.call(target.unit, hero);
 						include "support/battle/updateUnitState.as";
 						enemiesSumHP = Utils.countTotalHP(enemies);
 						alliesSumHP = Utils.countTotalHP(allies);
-						battleState = RUNNING;
+						battleState = BattleMode.RUNNING;
 						break;
 				}
 			}

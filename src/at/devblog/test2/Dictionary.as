@@ -13,22 +13,21 @@ package at.devblog.test2
 		 * 
 		 * Signature: target, caster
 		 */
-		public static function A_quickstrike(target:Unit, caster:Unit):void
+		public static function A_quickstrike(level:int):URO
 		{
-			var damageCount:int = Utils.random(40, caster.flow);
-			target.damage(damageCount, caster);
+			return new URO(40);
 		}
 		
-		public static function A_suppression(target:Unit, caster:Unit):void
+		public static function A_suppression(level:int):URO
 		{
 			var suppressedBuff:Buff = new Buff("Suppressed", 3);
-			suppressedBuff.cast(target);
+			return new URO(0, 0, 1, [suppressedBuff]);
 		}
 		
-		public static function A_enrage(target:Unit, caster:Unit):void
+		public static function A_enrage(level:int):URO
 		{
 			var enragedBuff:Buff = new Buff("Enraged", 2);
-			enragedBuff.cast(target);
+			return new URO(0, 0, 1, [enragedBuff]);
 		}
 		
 		/*Buff section
