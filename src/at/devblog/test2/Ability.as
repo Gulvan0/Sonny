@@ -1,13 +1,14 @@
-package at.devblog.test2 
+package at.devblog.test2
 {
 	import at.devblog.test2.utils.Element;
 	import com.demonsters.debugger.*;
 	import flash.display.MovieClip;
+	
 	/**
 	 * ...
 	 * @author Gulvan
 	 */
-	internal final class Ability 
+	internal final class Ability
 	{
 		/*
 		 * Ability creation:
@@ -23,13 +24,12 @@ package at.devblog.test2
 		private var _arcaneCost:int;
 		private var _startCooldown:int;
 		
-		private var element:Element;
+		private var _element:Element;
+		private var _level:int;
 		
 		//Variable properties
 		public var cooldown:int;
 		public var delay:int;
-		
-		private var _ama:Ama;
 		
 		public function canBeAppliedOn(unitType:String):Boolean
 		{
@@ -65,7 +65,7 @@ package at.devblog.test2
 		
 		public function call(target:Unit, caster:Unit):void
 		{
-			_link(target, caster, _ama);
+			_link(target, caster);
 			cooldown = _startCooldown;
 			caster.drain(_arcaneCost);
 			//Add shader + number of remaining turns
@@ -76,30 +76,30 @@ package at.devblog.test2
 		{
 			switch (name)
 			{
-				case "Quick Strike":
-					_icon = new Quickstrike();
-					_link = Dictionary.A_quickstrike;
-					_possibleTargets = ["enemy"];
-					_arcaneCost = 0;
-					break;
-				case "Suppression":
-					_icon = new Suppression();
-					_link = Dictionary.A_suppression;
-					_possibleTargets = ["self"];
-					_arcaneCost = 35;
-					break;
-				case "Enrage":
-					_icon = new Enrage();
-					_link = Dictionary.A_enrage;
-					_possibleTargets = ["self"];
-					_arcaneCost = 30;
-					break;
-				default:
-					return;
+			case "Quick Strike": 
+				_icon = new Quickstrike();
+				_link = Dictionary.A_quickstrike;
+				_possibleTargets = ["enemy"];
+				_arcaneCost = 0;
+				break;
+			case "Suppression": 
+				_icon = new Suppression();
+				_link = Dictionary.A_suppression;
+				_possibleTargets = ["self"];
+				_arcaneCost = 35;
+				break;
+			case "Enrage": 
+				_icon = new Enrage();
+				_link = Dictionary.A_enrage;
+				_possibleTargets = ["self"];
+				_arcaneCost = 30;
+				break;
+			default: 
+				return;
 			}
 		}
 		
-		public function Ability(newName:String, newCooldown:int, newDelay:int = 0) 
+		public function Ability(newName:String, newCooldown:int, newDelay:int = 0)
 		{
 			//Defining arbitrary properties
 			_name = newName;
@@ -113,29 +113,44 @@ package at.devblog.test2
 		
 		//-----------------------------------------------------------------------------------------
 		
-		public function get name():String 
+		public function get name():String
 		{
 			return _name;
 		}
 		
-		public function get icon():MovieClip 
+		public function get icon():MovieClip
 		{
 			return _icon;
 		}
 		
-		public function get link():Function 
+		public function get link():Function
 		{
 			return _link;
 		}
 		
-		public function get possibleTargets():Array 
+		public function get possibleTargets():Array
 		{
 			return _possibleTargets;
 		}
 		
-		public function get arcaneCost():int 
+		public function get arcaneCost():int
 		{
 			return _arcaneCost;
+		}
+		
+		public function get element():Element 
+		{
+			return _element;
+		}
+		
+		public function get level():int 
+		{
+			return _level;
+		}
+		
+		public function lvlUp():void 
+		{
+			_level++;
 		}
 	}
 

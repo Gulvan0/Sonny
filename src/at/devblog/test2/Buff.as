@@ -19,6 +19,8 @@ package at.devblog.test2
 		
 		//Constant properties
 		private var _name:String;
+		private var _section:String; //buff/debuff/complex
+		private var _type:String; //damage/dot/hot/shield/stun/defense ??????
 		private var _link:Function;
 		private var _icon:MovieClip;
 		
@@ -60,12 +62,16 @@ package at.devblog.test2
 			switch (name)
 			{
 				case "Enraged":
+					_section = "Buff";
+					_type = "Damage";
 					_link = Dictionary.B_enraged;
 					_icon = new MovieClip();
 					_icon.addChild(new PhysicalBuff());
 					_icon.addChild(new Buff1());
 					break;
 				case "Suppressed":
+					_section = "Buff";
+					_type = "Defense";
 					_link = Dictionary.B_suppressed;
 					_icon = new MovieClip();
 					_icon.addChild(new PhysicalBuff());
@@ -107,6 +113,16 @@ package at.devblog.test2
 		public function get turnsLeft():int 
 		{
 			return _turnsLeft;
+		}
+		
+		public function get type():String 
+		{
+			return _type;
+		}
+		
+		public function get section():String 
+		{
+			return _section;
 		}
 		
 	}

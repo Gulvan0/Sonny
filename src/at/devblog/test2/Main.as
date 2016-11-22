@@ -34,7 +34,7 @@ package at.devblog.test2
 		public static var hero:Unit;
 		public static var allies:Array;
 		
-		include "utils/graphics.as";
+		include "engine/graphics.as";
 		private function battle(enemy0:String, enemy1:String = null, enemy2:String = null):void
 		{
 			include "maps/battle.as";
