@@ -83,10 +83,22 @@ package at.devblog.test2
 		//--------------------------------------------------------------------------------------------------------
 		
 		//General utils
-		///Random number in the [leftside; leftside + diameter) diapasone
-		public static function random(leftSide:Number, diameter:Number):Number 
+		///Random number in the [begin; end) diapasone
+		public static function random(begin:Number, end:Number):Number
 		{
-			return leftSide + Math.random() * diameter;
+			return begin + Math.random() * (end - begin);
+		}
+		
+		///Random number in the [begin; begin + length) diapasone
+		public static function rayRandom(begin:Number, length:Number):Number 
+		{
+			return begin + Math.random() * length;
+		}
+		
+		///Random number in the (center - radius; center + radius) diapasone
+		public static function radialRandom(center:Number, radius:Number):Number
+		{
+			return center + Math.random() * radius * (flip(0.5)? 1 : -1);
 		}
 		
 		///Returns true with the chance given

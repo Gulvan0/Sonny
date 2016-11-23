@@ -21,13 +21,13 @@ package at.devblog.test2
 		public static function A_suppression(level:int):URO
 		{
 			var suppressedBuff:Buff = new Buff("Suppressed", 3);
-			return new URO(0, 0, 1, [suppressedBuff]);
+			return new URO(0, 0, [suppressedBuff]);
 		}
 		
 		public static function A_enrage(level:int):URO
 		{
 			var enragedBuff:Buff = new Buff("Enraged", 2);
-			return new URO(0, 0, 1, [enragedBuff]);
+			return new URO(0, 0, [enragedBuff]);
 		}
 		
 		/*Buff section

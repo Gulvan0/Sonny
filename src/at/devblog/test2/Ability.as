@@ -18,6 +18,7 @@ package at.devblog.test2
 		
 		//Constant properties
 		private var _name:String;
+		private var _type:String; //spell/bolt/kick/morph/summon
 		private var _icon:MovieClip;
 		private var _link:Function;
 		private var _possibleTargets:Array;

@@ -11,20 +11,38 @@ package at.devblog.test2
 		private var _miss:Boolean;
 		private var _shielded:Boolean;
 		
+		private var _attackType:String;
 		private var _critical:Boolean;
 		private var _deltaTargetHP:Sign;
 		private var _deltaCasterHP:Sign;
 		
 		private var _uro:URO;
 		
-		private function countTypedMiss(abilityType:String):Number
+		private function countTypedMiss():Number
 		{
-			
+			switch (_attackType)
+			{
+				case "kick":
+					return 2;
+				case "bolt":
+					return 1;
+				default:
+					return 0;
+			}
 		}
 		
 		private function countFlowDependentMiss(target:Unit, caster:Unit)
 		{
+			var minimumMiss:Number = 0.008 * target.flow;
+			var maximumMiss:Number = 1 - 0.015 * caster.flow;
 			
+			var miss:Number;
+			if (minimumMiss < maximumMiss)
+				miss = Utils.random(minimumMiss, maximumMiss);
+			else
+				miss = (maximumMiss > 0)? maximumMiss : 0;
+				
+			return miss;
 		}
 		
 		private function tryMiss(target:Unit, caster:Unit, abilityType:String):void
@@ -63,9 +81,9 @@ package at.devblog.test2
 			
 		}
 		
-		private function randomizeDamage():void
+		private function randomizeDamage(caster:Unit):void
 		{
-			
+			_uro.targetDamage += int(Utils.radialRandom(0, 10 * caster.level));
 		}
 		
 		private function countCrit(caster:Unit):void
@@ -73,14 +91,15 @@ package at.devblog.test2
 			
 		}
 		
-		private function prepareAdditionalProps():void
+		private function prepareAdditionalProps(target:Unit, caster:Unit):void
 		{
-			
+			_deltaTargetHP = Sign.toSign(_uro.targetDamage);
+			_deltaCasterHP = Sign.toSign(-_uro.casterHeal);
 		}
 		
-		public function loadURO(target:Unit, caster:Unit, abilityType:String):void
+		public function loadURO(target:Unit, caster:Unit):void
 		{
-			tryMiss(target, caster, abilityType);
+			tryMiss(target, caster);
 			if (_miss)
 				return;
 			
@@ -89,14 +108,15 @@ package at.devblog.test2
 				return;
 			
 			applyAttributes(target, caster);
-			randomizeDamage();
+			randomizeDamage(caster);
 			countCrit(caster);
 			prepareAdditionalProps();
 		}
 		
-		public function LRO(ro:URO) 
+		public function LRO(ro:URO, abilityType:String) 
 		{
 			_uro = ro;
+			_attackType = abilityType;
 		}
 		
 		//---------------------------------------------------------------
@@ -119,6 +139,11 @@ package at.devblog.test2
 		public function get uro():URO 
 		{
 			return _uro;
+		}
+		
+		public function get attackType():String 
+		{
+			return _attackType;
 		}
 		
 	}

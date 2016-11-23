@@ -15,7 +15,7 @@ package at.devblog.test2
 		
 		private var _selfMiss:Number;
 		
-		public function URO(targetDmg:int, casterHl:int = 0, miss:Number = 1, newTargetBuffs:Array = [], newCasterBuffs:Array = []) 
+		public function URO(targetDmg:int, casterHl:int = 0, newTargetBuffs:Array = [], newCasterBuffs:Array = [], miss:Number = 1) 
 		{
 			_targetDamage = targetDmg;
 			_casterHeal = casterHl;
