@@ -101,6 +101,15 @@ package at.devblog.test2
 			return center + Math.random() * radius * (flip(0.5)? 1 : -1);
 		}
 		
+		///Checks if the number is in the [begin; end] diapasone
+		public static function isInDiapasone(number:Number, begin:Number, end:Number):Boolean
+		{
+			if (number >= begin && number <= end)
+				return true;
+			else
+				return false;
+		}
+		
 		///Returns true with the chance given
 		public static function flip(chance:Number):Boolean 
 		{

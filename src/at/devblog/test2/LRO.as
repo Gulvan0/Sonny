@@ -88,7 +88,37 @@ package at.devblog.test2
 		
 		private function countCrit(caster:Unit):void
 		{
+			var critChance:Number = 0;
+			var damageMultiplier:Number = 1;
 			
+			for (var i:int = 0; i < caster.flow; i++)
+			{
+				if (Utils.isInDiapasone(i, 0, 35))
+				{
+					critChance += 0,007;
+					damageMultiplier += 0.06;
+				}
+				else if (Utils.isInDiapasone(i, 35, 89))
+				{
+					critChance += 0,0046;
+					damageMultiplier += 0.034;
+				}
+				else if (Utils.isInDiapasone(i, 90, 119))
+				{
+					critChance += 0,016;
+					damageMultiplier -= 0.033;
+				}
+				else if (i >= 120)
+				{
+					damageMultiplier += 0.02;
+				}
+			}
+			
+			if (Utils.flip(critChance))
+			{
+				_critical = true;
+				_uro.targetDamage *= damageMultiplier;
+			}
 		}
 		
 		private function prepareAdditionalProps(target:Unit, caster:Unit):void
