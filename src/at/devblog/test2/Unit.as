@@ -1,5 +1,8 @@
 package at.devblog.test2 
 {
+	import at.devblog.test2.UNIT.AbilityPool;
+	import at.devblog.test2.UNIT.AttributeList;
+	import at.devblog.test2.UNIT.Expirience;
 	import at.devblog.test2.utils.GainResult;
 	import com.demonsters.debugger.*;
 	import flash.display.MovieClip;
@@ -27,19 +30,19 @@ package at.devblog.test2
 		public var equipment:Equipment;
 		
 		//Character develop properties
-		private var _level:int;
-		private var _xp:int;
+		public var expirience:Expirience;
+		public var abilityPool:AbilityPool;
+		public var attribs:AttributeList; 
 		
-		public var vitality:int;
-		public var strength:int;
-		public var flow:int;
-		public var intellect:int;
+		public function gainXP(xpCount:int):GainResult
+		{
+			return expirience.gainXP(xpCount, this);
+		}
 		
-		public var abilityPoints:int;
-		public var attributePoints:int;
-		
-		private var _wheelMaxLength:int;
-		private var _wheel:Array;
+		public function respec():void
+		{
+			
+		}
 		
 		//Subordinate properties
 		private var _maxhp:int;
@@ -54,120 +57,34 @@ package at.devblog.test2
 		private var _buffs:Array;
 		
 		
-		public function damage(damageCount:int, dealer:Unit, pure:Boolean = false):void
+		public function damage(damage:int):void
 		{
-			var totalDamage:Number = damageCount;
-			
-			if (!pure)
-			{
-				//Instinct increases damage done, defense decreases damage taken
-				totalDamage *= (dealer.instinct / 100) / (defense / 100);
-				//Strength increases damage done - 1 strength point for 10 damage point
-				totalDamage += dealer.strength * 10;
-				//Critical hit - +10% damage for every flow point with a chance equal to 1% for every flow point (<= 97%)
-				var critChance:Number = dealer.flow * 0.01;
-				if (critChance > 0.97)
-					critChance = 0.97;
-				
-				if (Utils.flip(critChance))
-					totalDamage *= dealer.flow * 0.10;
-			}
-			
-			//To avoid negative hp values
-			if (totalDamage > _hp)
+			if (damage > _hp)
 				_hp = 0;
-			else
-			    _hp -= totalDamage;
-		}
-		
-		public function heal(healCount:int, healer:Unit, pure:Boolean = false):void
-		{
-			var totalHeal:Number = healCount;
-			
-			if (!pure)
-			{
-				totalHeal += healer.strength;
-				totalHeal *= 1 + 0.08 * healer.vitality; // +8% for every healer's vitality point
-				totalHeal *= 1 + 0.04 * vitality; // +4% for every target's vitality point
-			}
-			
-			//To avoid over-max hp values
-			if (totalHeal > _maxhp)
+			else if (-damage > _maxhp)
 				_hp = _maxhp;
 			else
-			    _hp += totalHeal;
+			    _hp -= damage;
 		}
 		
-		public function drain(arcaneCount:int, drainer:Unit = null):void
+		public function drain(arcaneCount:int):void
 		{
-			var totalArcane:Number = arcaneCount;
+			//arcaneCount += drainer.intellect;
 			
-			if (drainer != null)
-				totalArcane += drainer.intellect;
-			
-			//To avoid negative arcane values
-			if (totalArcane > _arcane)
+			if (arcaneCount > _arcane)
 				_arcane = 0;
 			else
-			    _arcane -= totalArcane;
+			    _arcane -= arcaneCount;
 		}
 		
-		public function restore(arcaneCount:int, restorer:Unit = null):void
+		public function restore(arcaneCount:int):void
 		{
-			var totalArcane:Number = arcaneCount;
+			//arcaneCount += intellect * 0.5;
 			
-			if (restorer != null)
-				totalArcane += intellect * 0.5; //Bonus counts only if arcane was restored by player
-			
-			//To avoid over-max arcane values
 			if (arcaneCount > _maxArcane)
 				_arcane = _maxArcane;
 			else
 			    _arcane += arcaneCount;
-		}
-		/**
-		 * Gain given xp. Unit will be leveled up if there's enough xp
-		 * @return Structure. Field "toGain" defines goal xp for the new level. "newLevel" shows was the new level reached or not
-		 */
-		public function gainXP(xpCount:int):GainResult
-		{
-			var result:GainResult = new GainResult();
-			
-			var xpToGain:int = Utils.countXPLeft(this);
-			result.toGain = xpToGain;
-			
-			if (xpCount >= xpToGain)
-			{
-				_xp = xpCount - xpToGain;
-				_level++;
-				levelUp();
-				result.newLevel = true;
-			}
-			else
-			{
-				_xp += xpCount;
-				result.newLevel = false;
-			}
-			
-			return result;
-		}
-		
-		private function levelUp():void
-		{
-			abilityPoints++;
-			attributePoints++;
-			
-			if (_level % 5 == 0)
-			{
-				vitality++;
-				strength++;
-				flow++;
-				intellect++;
-				abilityPoints += 4;
-			}
-			
-			if (_level == 30 || _level == 75)
-				_wheelMaxLength++;
 		}
 		
 		// ---------------------------------------------------------------------------------------

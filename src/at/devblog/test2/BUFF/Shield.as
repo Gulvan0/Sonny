@@ -1,4 +1,4 @@
-package at.devblog.test2 
+package at.devblog.test2.BUFF 
 {
 	/**
 	 * ...

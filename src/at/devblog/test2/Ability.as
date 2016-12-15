@@ -8,7 +8,7 @@ package at.devblog.test2
 	 * ...
 	 * @author Gulvan
 	 */
-	internal final class Ability
+	public final class Ability
 	{
 		/*
 		 * Ability creation:

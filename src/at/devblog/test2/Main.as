@@ -2,6 +2,7 @@ package at.devblog.test2
 {
 	import at.devblog.test2.utils.BattleMode;
 	import at.devblog.test2.utils.GainResult;
+	import at.devblog.test2.utils.UnitTarget;
 	import com.demonsters.debugger.MonsterDebugger;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
