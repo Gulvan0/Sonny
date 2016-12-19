@@ -1,5 +1,7 @@
 package at.devblog.test2.UNIT 
 {
+	import at.devblog.test2.*;
+	import at.devblog.test2.engine.*;
 	/**
 	 * ...
 	 * @author Gulvan
@@ -13,26 +15,19 @@ package at.devblog.test2.UNIT
 		 * Gain given xp. Unit will be leveled up if there's enough xp
 		 * @return Structure. Field "toGain" defines goal xp for the new level. "newLevel" shows was the new level reached or not
 		 */
-		public function gainXP(xpCount:int, caller:Unit):GainResult
+		public function gainXP(xpCount:int, caller:Unit):State
 		{
-			var result:GainResult = new GainResult();
-			
-			var xpToGain:int = Utils.countXPLeft(this);
-			result.toGain = xpToGain;
-			
-			if (xpCount >= xpToGain)
+			if (xpCount >= xpLeft())
 			{
 				levelUp(caller);
-				_xp = xpCount - xpToGain;
-				result.newLevel = true;
+				_xp = xpCount - xpLeft();
+				return new State(-1, "New level");
 			}
 			else
 			{
 				_xp += xpCount;
-				result.newLevel = false;
+				return new State(-2, "Old level");
 			}
-			
-			return result;
 		}
 		
 		private function levelUp(caller:Unit):void
@@ -53,6 +48,14 @@ package at.devblog.test2.UNIT
 			
 			if (_level == 50 || _level == 100)
 				pool.prolongWheel();
+		}
+		
+		
+		public function xpLeft():int
+		{
+			var result:Number = 100 * Math.pow(_level, 1.1);
+			result -= _xp;
+			return Math.round(result);
 		}
 		
 		//-----------------------------------------------------------

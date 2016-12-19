@@ -29,7 +29,7 @@ package at.devblog.test2.UNIT
 		
 		public function learn(xPos:int, yPos:int):State
 		{
-			var learningAbility:TreeAbility = _tree[xPos][yPos];
+			var learningAbility = _tree[xPos][yPos];
 			
 			if (_abilityPoints <= 0)
 				return new State(1, "Not enough ability points");

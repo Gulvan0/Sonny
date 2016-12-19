@@ -3,6 +3,7 @@ package at.devblog.test2
 	import at.devblog.test2.UNIT.AbilityPool;
 	import at.devblog.test2.UNIT.AttributeList;
 	import at.devblog.test2.UNIT.Expirience;
+	import at.devblog.test2.engine.State;
 	import at.devblog.test2.utils.GainResult;
 	import com.demonsters.debugger.*;
 	import flash.display.MovieClip;
@@ -30,19 +31,9 @@ package at.devblog.test2
 		public var equipment:Equipment;
 		
 		//Character develop properties
-		public var expirience:Expirience;
+		private var expirience:Expirience;
 		public var abilityPool:AbilityPool;
-		public var attribs:AttributeList; 
-		
-		public function gainXP(xpCount:int):GainResult
-		{
-			return expirience.gainXP(xpCount, this);
-		}
-		
-		public function respec():void
-		{
-			
-		}
+		private var attribs:AttributeList; 
 		
 		//Subordinate properties
 		private var _maxhp:int;
@@ -173,14 +164,19 @@ package at.devblog.test2
 			return _type;
 		}
 		
+		public function get line():String 
+		{
+			return _line;
+		}
+		
 		public function get level():int 
 		{
-			return _level;
+			return expirience.level;
 		}
 		
 		public function get xp():int 
 		{
-			return _xp;
+			return expirience.xp;
 		}
 		
 		public function get wheelMaxLength():int 
@@ -218,9 +214,36 @@ package at.devblog.test2
 			return _buffs;
 		}
 		
-		public function get line():String 
+		//--------------------------------------------------------------------------------------
+		
+		public function gainXP(xpCount:int):State
 		{
-			return _line;
+			return expirience.gainXP(xpCount, this);
+		}
+		
+		public function xpLeft():int
+		{
+			return expirience.xpLeft();
+		}
+		
+		public function respec():void
+		{
+			
+		}
+		
+		public function attribUp():void
+		{
+			attribs.attribUp();
+		}
+		
+		public function earnAttribPoints(attribPoints:int = 1):void
+		{
+			attribs.earn(attribPoints);
+		}
+		
+		public function spendAttribPoints(attribute:String):void
+		{
+			attribs.spend(attribute);
 		}
 	}
 	

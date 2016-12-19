@@ -44,14 +44,6 @@ package at.devblog.test2
 		//--------------------------------------------------------------------------------------------------------
 		
 		//Looting utils
-		public static function countXPLeft(unit:Unit):int
-		{
-			var result:Number = 100 * Math.pow(unit.level, 1.1);
-			result -= unit.xp;
-			
-			return Math.round(result);
-		}
-		
 		public static function getAverageLevel(unitArray:Array):Number
 		{
 			var levelSum:int = 0;

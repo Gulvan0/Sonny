@@ -1,6 +1,6 @@
 package at.devblog.test2 
 {
-	import at.devblog.test2.BUFF.Shield;
+	import at.devblog.test2.buffs.Shield;
 	import at.devblog.test2.engine.Sign;
 	/**
 	 * ...

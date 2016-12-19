@@ -1,5 +1,6 @@
 package at.devblog.test2 
 {
+	import at.devblog.test2.engine.State;
 	import at.devblog.test2.utils.BattleMode;
 	import at.devblog.test2.utils.GainResult;
 	import at.devblog.test2.utils.UnitTarget;
@@ -134,20 +135,21 @@ package at.devblog.test2
 		
 		private function looting(winnerTeam:String, allyArray:Array, enemyArray:Array):void
 		{
-			//Math & logic part
 			var xpGained:int = Utils.countGainedXP(allyArray, enemyArray, winnerTeam);
 			var xpToGain:Array = [];
 			var isLvledUp:Array = [];
-			
 			var loot:Array = [];
 			
 			for each (var ally:Unit in allyArray)
 			{
-				var gainingResult:GainResult = ally.gainXP(xpGained);
-				xpToGain.push(gainingResult.toGain);
-				isLvledUp.push(gainingResult.newLevel);
+				var gainState:State;
+				
+				xpToGain.push(ally.xpLeft());
+				gainState = ally.gainXP(xpGained);
+				isLvledUp.push((gainState.code == -1)? true : false;
 			}
 			
+			//Counting loot
 			for each (var item:Item in enemyArray[0].equipment.arrayForm)
 				if (item != null)
 					if (Utils.flip(item.dropChance))
@@ -157,7 +159,7 @@ package at.devblog.test2
 			for (var i:int = loot.length; i < 4; i++)
 				loot.push(new Item("None"));
 			
-			//Visual part
+			//Visualising
 			include "maps/looting.as";
 			var lootingContainer:Sprite = new Sprite();
 			place(lootingContainer);
